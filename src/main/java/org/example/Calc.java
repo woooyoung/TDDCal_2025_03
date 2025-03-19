@@ -7,6 +7,14 @@ public class Calc {
         boolean needToMulti = exp.contains("*");
         boolean needToPlus = exp.contains("+");
 
+        boolean needToCompound = needToPlus && needToMulti;
+
+        if (needToCompound) {
+            String[] bits = exp.split(" \\+ ");
+
+            return Integer.parseInt(bits[0]) + run(bits[1]);
+        }
+
         if (needToPlus) {
             exp = exp.replace("- ", "+ -");
 
@@ -31,7 +39,7 @@ public class Calc {
             return sum;
         }
 
-         throw new RuntimeException("해석 불가 : 올바른 계산식이 아닙니다");
+        throw new RuntimeException("해석 불가 : 올바른 계산식이 아닙니다");
     }
 
 }
