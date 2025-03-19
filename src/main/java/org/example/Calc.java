@@ -11,8 +11,8 @@ public class Calc {
             return Integer.parseInt(exp);
         }
 
-        boolean needToMulti = exp.contains("*");
-        boolean needToPlus = exp.contains("+");
+        boolean needToMulti = exp.contains(" * ");
+        boolean needToPlus = exp.contains(" + ") || exp.contains(" - ");
 
         boolean needToCompound = needToPlus && needToMulti;
 
@@ -23,26 +23,6 @@ public class Calc {
                     .mapToInt(Calc::run)
                     .mapToObj(e -> e + "")
                     .collect(Collectors.joining(" + "));
-
-//            String newExp = "";
-//            for (int i = 0; i < bits.length; i++) {
-//                int result = Calc.run(bits[i]);
-//                newExp += result;
-//                if (i < bits.length - 1) {
-//                    newExp += " + ";
-//                }
-//            }
-
-
-//            StringBuilder newExpBuilder = new StringBuilder();
-//            for (int i = 0; i < bits.length; i++) {
-//                newExpBuilder.append(Calc.run(bits[i]));
-//                if (i < bits.length - 1) {
-//                    newExpBuilder.append(" + ");
-//                }
-//            }
-//            String newExp = newExpBuilder.toString();
-
 
             return run(newExp);
         }
