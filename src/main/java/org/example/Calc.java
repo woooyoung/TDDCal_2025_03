@@ -1,8 +1,15 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class Calc {
 
     public static int run(String exp) {
+        // 단일항이 들어오면 바로 리턴
+        if (!exp.contains(" ")) {
+            return Integer.parseInt(exp);
+        }
 
         boolean needToMulti = exp.contains("*");
         boolean needToPlus = exp.contains("+");
@@ -12,7 +19,32 @@ public class Calc {
         if (needToCompound) {
             String[] bits = exp.split(" \\+ ");
 
-            return Integer.parseInt(bits[0]) + run(bits[1]);
+            String newExp = Arrays.stream(bits)
+                    .mapToInt(Calc::run)
+                    .mapToObj(e -> e + "")
+                    .collect(Collectors.joining(" + "));
+
+//            String newExp = "";
+//            for (int i = 0; i < bits.length; i++) {
+//                int result = Calc.run(bits[i]);
+//                newExp += result;
+//                if (i < bits.length - 1) {
+//                    newExp += " + ";
+//                }
+//            }
+
+
+//            StringBuilder newExpBuilder = new StringBuilder();
+//            for (int i = 0; i < bits.length; i++) {
+//                newExpBuilder.append(Calc.run(bits[i]));
+//                if (i < bits.length - 1) {
+//                    newExpBuilder.append(" + ");
+//                }
+//            }
+//            String newExp = newExpBuilder.toString();
+
+
+            return run(newExp);
         }
 
         if (needToPlus) {

@@ -103,4 +103,16 @@ public class CalcTest {
         assertThat(Calc.run("10 + 5 * 2")).isEqualTo(20);
     }
 
+    @Test
+    @DisplayName("20 + 10 + 5 * 2 == 40")
+    public void test17() {
+        assertThat(Calc.run("20 + 10 + 5 * 2")).isEqualTo(40);
+    }
+
+    @Test
+    @DisplayName("10 * 20 + 10 + 5 * 2  == 220")
+    public void test18() {
+        assertThat(Calc.run("10 * 20 + 10 + 5 * 2")).isEqualTo(220);
+    }
+
 }
